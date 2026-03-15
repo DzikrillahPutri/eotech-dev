@@ -7,6 +7,37 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class EventSchema extends BaseModel {
+  static $columns = ['banner', 'createdAt', 'description', 'eventId', 'location', 'organizerContact', 'ownerId', 'registrationEndAt', 'registrationStartAt', 'slug', 'status', 'title', 'updatedAt'] as const
+  $columns = EventSchema.$columns
+  @column()
+  declare banner: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column()
+  declare eventId: string
+  @column()
+  declare location: string
+  @column()
+  declare organizerContact: string
+  @column()
+  declare ownerId: string
+  @column.dateTime()
+  declare registrationEndAt: DateTime
+  @column.dateTime()
+  declare registrationStartAt: DateTime
+  @column()
+  declare slug: string | null
+  @column()
+  declare status: string
+  @column()
+  declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'fullName', 'password', 'role', 'updatedAt', 'userId'] as const
   $columns = UserSchema.$columns

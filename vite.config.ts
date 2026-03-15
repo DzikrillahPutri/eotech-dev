@@ -22,4 +22,9 @@ export default defineConfig({
       ignored: ['**/storage/**', '**/tmp/**'],
     },
   },
+
+  optimizeDeps: {
+    noDiscovery: true,   // stops Vite from scanning imports during boot
+    include: [],         // no pre-bundling at all
+  },
 })

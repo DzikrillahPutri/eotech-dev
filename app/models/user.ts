@@ -15,7 +15,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   public static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })
-  declare userId: string
+  declare user_id: string
 
   @column()
   declare fullName: string | null
@@ -37,8 +37,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @beforeCreate()
   static assignUuid(user: User) {
-    if (!user.userId) {
-      user.userId = uuidv4()
+    if (!user.user_id) {
+      user.user_id = uuidv4()
     }
   }
 
