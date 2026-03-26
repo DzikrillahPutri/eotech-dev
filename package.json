@@ -81,6 +81,7 @@
     "japa": "^4.0.0",
     "luxon": "^3.7.2",
     "mysql2": "^3.19.1",
+    "object-to-formdata": "^4.5.1",
     "reflect-metadata": "^0.2.2",
     "uuid": "^13.0.0",
     "vue": "^3.5.29",

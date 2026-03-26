@@ -14,7 +14,7 @@ export class EventMemberSchema extends BaseModel {
   declare createdAt: DateTime | null
   @column()
   declare eventId: string
-  @column()
+  @column({ isPrimary: true })
   declare eventMemberId: string
   @column()
   declare role: string
@@ -33,7 +33,7 @@ export class EventSchema extends BaseModel {
   declare createdAt: DateTime | null
   @column()
   declare description: string | null
-  @column()
+  @column({ isPrimary: true })
   declare eventId: string
   @column()
   declare location: string
@@ -68,7 +68,7 @@ export class OrderSchema extends BaseModel {
   declare createdAt: DateTime | null
   @column()
   declare eventId: string
-  @column()
+  @column({ isPrimary: true })
   declare orderId: string
   @column()
   declare paymentId: string | null
@@ -85,7 +85,7 @@ export class PaymentSchema extends BaseModel {
   declare createdAt: DateTime | null
   @column.dateTime()
   declare paymentExpiredAt: DateTime
-  @column()
+  @column({ isPrimary: true })
   declare paymentId: string
   @column()
   declare paymentMethods: string
@@ -116,7 +116,7 @@ export class TicketTypeSchema extends BaseModel {
   declare salesStartDate: DateTime | null
   @column()
   declare ticketName: string
-  @column()
+  @column({ isPrimary: true })
   declare ticketTypeId: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
@@ -135,7 +135,7 @@ export class TicketSchema extends BaseModel {
   declare qrcode: string
   @column()
   declare statusTicket: string
-  @column()
+  @column({ isPrimary: true })
   declare ticketId: string
   @column()
   declare ticketTypeId: string
@@ -158,6 +158,6 @@ export class UserSchema extends BaseModel {
   declare role: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
-  @column()
+  @column({ isPrimary: true })
   declare userId: string
 }

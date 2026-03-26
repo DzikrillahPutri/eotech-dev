@@ -9,22 +9,10 @@ export default defineConfig({
     inertia({ ssr: { enabled: false, entrypoint: 'inertia/ssr.ts' } }),
     adonisjs({ entrypoints: ['inertia/app.ts'], reload: ['resources/views/**/*.edge'] }),
   ],
-
   resolve: {
     alias: {
       '~/': `${import.meta.dirname}/inertia/`,
       '@generated': `${import.meta.dirname}/.adonisjs/client/`,
     },
-  },
-
-  server: {
-    watch: {
-      ignored: ['**/storage/**', '**/tmp/**'],
-    },
-  },
-
-  optimizeDeps: {
-    noDiscovery: true,   // stops Vite from scanning imports during boot
-    include: [],         // no pre-bundling at all
   },
 })
