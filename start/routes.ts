@@ -21,7 +21,11 @@ router
     router.get('signup', [controllers.NewAccount, 'create'])
     router.post('signup', [controllers.NewAccount, 'store'])
 
-    router.get('login', [controllers.Session, 'create'])
+    // Route Login (Halaman & Action)
+    router.get('login', async ({ inertia }) => {
+      return inertia.render('auth/login') 
+    }).as('login')
+    
     router.post('login', [controllers.Session, 'store'])
   })
   .use(middleware.guest())
@@ -34,15 +38,11 @@ router
 
 
 // ─── Event API ────────────────────────────────────────────────────────────────
-// PRD 7.1: Public — shareable event URL, no login required
 router.group(() => {
-  // Public: list published events & view by slug (PRD: URL publik tanpa login)
   router.get(`${api}/events`, 'EventsController.index')
   router.get(`${api}/events/slug/:slug`, 'EventsController.showBySlug')
 }).prefix('')
 
-// PRD 7.1 + Role: Admin/Owner can create, update, archive events
-// ERD Roles: event_organizer_admin, super_admin
 router
   .group(() => {
     router.post(`${api}/events`, 'EventsController.store')
@@ -56,10 +56,8 @@ router
 
 
 // ─── Event Member / Partner API ───────────────────────────────────────────────
-// PRD 7.4 + 7.6: Undang partner EO via magic link, manage roles
 router
   .group(() => {
-    // Admin only: invite & revoke partner access
     router.post(`${api}/events/:eventId/members/invite`, 'EventMembersController.invite')
     router.delete(`${api}/events/:eventId/members/:memberId`, 'EventMembersController.revoke')
     router.get(`${api}/events/:eventId/members`, 'EventMembersController.index')
@@ -67,12 +65,10 @@ router
   .use(middleware.auth())
   .use(middleware.role(['event_organizer_admin', 'super_admin']))
 
-// PRD 7.6: Partner accepts invite via magic link (no auth — link-based)
 router.get(`${api}/invitations/:token`, 'EventMembersController.acceptInvite')
 
 
 // ─── Ticket Type API ──────────────────────────────────────────────────────────
-// PRD 7.2: Admin manages ticket types per event
 router
   .group(() => {
     router.get(`${api}/events/:eventId/ticket-types`, 'TicketTypesController.index')
@@ -85,40 +81,33 @@ router
 
 
 // ─── Order & Payment API ──────────────────────────────────────────────────────
-// PRD 7.3: Buyer checkout flow — pilih tiket → isi data → bayar → e-ticket
-// PRD: Pembeli butuh login untuk mengakses order/tiket mereka
 router
   .group(() => {
-    router.post(`${api}/orders`, 'OrdersController.store')                  // checkout
-    router.get(`${api}/orders/:id`, 'OrdersController.show')                // lihat order
-    router.get(`${api}/orders/:id/tickets`, 'OrdersController.tickets')     // lihat tiket dari order
+    router.post(`${api}/orders`, 'OrdersController.store')
+    router.get(`${api}/orders/:id`, 'OrdersController.show')
+    router.get(`${api}/orders/:id/tickets`, 'OrdersController.tickets')
   })
   .use(middleware.auth())
   .use(middleware.role(['participant', 'event_organizer_admin', 'super_admin']))
 
-// PRD: User can check ticket status by ticket number (no login — public lookup)
 router.get(`${api}/tickets/:ticketId/status`, 'TicketsController.checkStatus')
 
 
 // ─── Payment Webhook / Callback ───────────────────────────────────────────────
-// PRD 7.3: Payment gateway callback (status otomatis)
 router.post(`${api}/payments/webhook`, 'PaymentsController.webhook')
 
 
 // ─── Check-in API ─────────────────────────────────────────────────────────────
-// PRD 7.4: Gate Staff — scan QR, verifikasi tiket
-// ERD Roles: volunteer_organizer (Gate Staff)
 router
   .group(() => {
-    router.post(`${api}/checkin`, 'TicketsController.checkin')              // scan & validate QR
-    router.get(`${api}/checkin/history`, 'TicketsController.checkinHistory') // riwayat check-in
+    router.post(`${api}/checkin`, 'TicketsController.checkin')
+    router.get(`${api}/checkin/history`, 'TicketsController.checkinHistory')
   })
   .use(middleware.auth())
   .use(middleware.role(['volunteer_organizer', 'event_organizer_admin', 'super_admin']))
 
 
 // ─── Dashboard & Reporting API ────────────────────────────────────────────────
-// PRD 7.5: Admin — ringkasan penjualan, breakdown, export CSV
 router
   .group(() => {
     router.get(`${api}/events/:eventId/dashboard`, 'DashboardController.summary')
@@ -129,10 +118,48 @@ router
   .use(middleware.auth())
   .use(middleware.role(['event_organizer_admin', 'super_admin']))
 
-// PRD 7.5: Partner EO — hanya akses ringkasan dasar (bukan export sensitif)
 router
   .group(() => {
     router.get(`${api}/events/:eventId/dashboard/summary`, 'DashboardController.partnerSummary')
   })
   .use(middleware.auth())
   .use(middleware.role(['volunteer_organizer', 'event_organizer_admin', 'super_admin']))
+
+// ─── View Routes (Halaman Dashboard Admin) ───────────────────────────────────
+router
+  .group(() => {
+    // Dashboard
+    router.get('/admin/dashboard', async ({ inertia }) => {
+      return inertia.render('admin/dashboard')
+    }).as('admin.dashboard')
+
+    // Kelola Event
+    router.get('/admin/events', async ({ inertia }) => {
+      return inertia.render('admin/events/index')
+    }).as('admin.events')
+
+    router.get('/admin/events/create', async ({ inertia }) => {
+      return inertia.render('admin/events/create')
+    }).as('admin.events.create')
+
+    // Laporan Penjualan
+    router.get('/admin/reports', async ({ inertia }) => {
+      return inertia.render('admin/reports/index')
+    }).as('admin.reports')
+
+    // Manajemen Kuota
+    router.get('/admin/tickets/quota', async ({ inertia }) => {
+      return inertia.render('admin/tickets/quota')
+    }).as('admin.tickets.quota')
+
+    router.get('/admin/tickets/quota/create', async ({ inertia }) => {
+      return inertia.render('admin/tickets/create_quota')
+    }).as('admin.tickets.quota.create')
+
+    // BARU: Kolaborasi Partner
+    router.get('/admin/partners', async ({ inertia }) => {
+      return inertia.render('admin/partners/index')
+    }).as('admin.partners')
+
+  })
+  .use(middleware.auth())

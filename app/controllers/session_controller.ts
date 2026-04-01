@@ -11,11 +11,14 @@ export default class SessionController {
     const user = await User.verifyCredentials(email, password)
 
     await auth.use('web').login(user)
-    response.redirect().toRoute('home')
+
+    // PERBAIKAN: Arahkan langsung ke halaman Kelola Event
+    // Nama 'admin.events' sesuai dengan yang kita tulis di routes.ts tadi
+    return response.redirect().toRoute('admin.events')
   }
 
   async destroy({ auth, response }: HttpContext) {
     await auth.use('web').logout()
-    response.redirect().toRoute('session.create')
+    return response.redirect().toRoute('login')
   }
 }

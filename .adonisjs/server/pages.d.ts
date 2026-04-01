@@ -14,5 +14,13 @@ declare module '@adonisjs/inertia/types' {
     'errors/not_found': ExtractProps<(typeof import('../../inertia/pages/errors/not_found.vue'))['default']>
     'errors/server_error': ExtractProps<(typeof import('../../inertia/pages/errors/server_error.vue'))['default']>
     'home': ExtractProps<(typeof import('../../inertia/pages/home.vue'))['default']>
+    'admin/events/index': ExtractProps<(typeof import('../../inertia/pages/admin/events/index.vue'))['default']>
+    'admin/dashboard': ExtractProps<(typeof import('../../inertia/pages/admin/dashboard.vue'))['default']>
+    'admin/events/create': ExtractProps<(typeof import('../../inertia/pages/admin/events/create.vue'))['default']>
+    'admin/reports/index': ExtractProps<(typeof import('../../inertia/pages/admin/reports/index.vue'))['default']>
+    'admin/tickets/quota': ExtractProps<(typeof import('../../inertia/pages/admin/tickets/quota.vue'))['default']>
+    'admin/tickets/create_quota': ExtractProps<(typeof import('../../inertia/pages/admin/tickets/create_quota.vue'))['default']>
+    'admin/partners/index': ExtractProps<(typeof import('../../inertia/pages/admin/partners/index.vue'))['default']>
+    'events/show': ExtractProps<(typeof import('../../inertia/pages/events/show.vue'))['default']>
   }
 }

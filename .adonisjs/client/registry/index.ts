@@ -24,11 +24,11 @@ const routes = {
     tokens: [{"old":"/signup","type":0,"val":"signup","end":""}],
     types: placeholder as Registry['new_account.store']['types'],
   },
-  'session.create': {
+  'login': {
     methods: ["GET","HEAD"],
     pattern: '/login',
     tokens: [{"old":"/login","type":0,"val":"login","end":""}],
-    types: placeholder as Registry['session.create']['types'],
+    types: placeholder as Registry['login']['types'],
   },
   'session.store': {
     methods: ["POST"],
@@ -203,6 +203,48 @@ const routes = {
     pattern: '/api/v1/events/:eventId/dashboard/summary',
     tokens: [{"old":"/api/v1/events/:eventId/dashboard/summary","type":0,"val":"api","end":""},{"old":"/api/v1/events/:eventId/dashboard/summary","type":0,"val":"v1","end":""},{"old":"/api/v1/events/:eventId/dashboard/summary","type":0,"val":"events","end":""},{"old":"/api/v1/events/:eventId/dashboard/summary","type":1,"val":"eventId","end":""},{"old":"/api/v1/events/:eventId/dashboard/summary","type":0,"val":"dashboard","end":""},{"old":"/api/v1/events/:eventId/dashboard/summary","type":0,"val":"summary","end":""}],
     types: placeholder as Registry['dashboard.partner_summary']['types'],
+  },
+  'admin.dashboard': {
+    methods: ["GET","HEAD"],
+    pattern: '/admin/dashboard',
+    tokens: [{"old":"/admin/dashboard","type":0,"val":"admin","end":""},{"old":"/admin/dashboard","type":0,"val":"dashboard","end":""}],
+    types: placeholder as Registry['admin.dashboard']['types'],
+  },
+  'admin.events': {
+    methods: ["GET","HEAD"],
+    pattern: '/admin/events',
+    tokens: [{"old":"/admin/events","type":0,"val":"admin","end":""},{"old":"/admin/events","type":0,"val":"events","end":""}],
+    types: placeholder as Registry['admin.events']['types'],
+  },
+  'admin.events.create': {
+    methods: ["GET","HEAD"],
+    pattern: '/admin/events/create',
+    tokens: [{"old":"/admin/events/create","type":0,"val":"admin","end":""},{"old":"/admin/events/create","type":0,"val":"events","end":""},{"old":"/admin/events/create","type":0,"val":"create","end":""}],
+    types: placeholder as Registry['admin.events.create']['types'],
+  },
+  'admin.reports': {
+    methods: ["GET","HEAD"],
+    pattern: '/admin/reports',
+    tokens: [{"old":"/admin/reports","type":0,"val":"admin","end":""},{"old":"/admin/reports","type":0,"val":"reports","end":""}],
+    types: placeholder as Registry['admin.reports']['types'],
+  },
+  'admin.tickets.quota': {
+    methods: ["GET","HEAD"],
+    pattern: '/admin/tickets/quota',
+    tokens: [{"old":"/admin/tickets/quota","type":0,"val":"admin","end":""},{"old":"/admin/tickets/quota","type":0,"val":"tickets","end":""},{"old":"/admin/tickets/quota","type":0,"val":"quota","end":""}],
+    types: placeholder as Registry['admin.tickets.quota']['types'],
+  },
+  'admin.tickets.quota.create': {
+    methods: ["GET","HEAD"],
+    pattern: '/admin/tickets/quota/create',
+    tokens: [{"old":"/admin/tickets/quota/create","type":0,"val":"admin","end":""},{"old":"/admin/tickets/quota/create","type":0,"val":"tickets","end":""},{"old":"/admin/tickets/quota/create","type":0,"val":"quota","end":""},{"old":"/admin/tickets/quota/create","type":0,"val":"create","end":""}],
+    types: placeholder as Registry['admin.tickets.quota.create']['types'],
+  },
+  'admin.partners': {
+    methods: ["GET","HEAD"],
+    pattern: '/admin/partners',
+    tokens: [{"old":"/admin/partners","type":0,"val":"admin","end":""},{"old":"/admin/partners","type":0,"val":"partners","end":""}],
+    types: placeholder as Registry['admin.partners']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

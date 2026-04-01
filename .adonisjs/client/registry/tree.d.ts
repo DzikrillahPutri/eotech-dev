@@ -7,8 +7,8 @@ export interface ApiDefinition {
     create: typeof routes['new_account.create']
     store: typeof routes['new_account.store']
   }
+  login: typeof routes['login']
   session: {
-    create: typeof routes['session.create']
     store: typeof routes['session.store']
     destroy: typeof routes['session.destroy']
   }
@@ -52,5 +52,18 @@ export interface ApiDefinition {
     exportTransactions: typeof routes['dashboard.export_transactions']
     exportCheckins: typeof routes['dashboard.export_checkins']
     partnerSummary: typeof routes['dashboard.partner_summary']
+  }
+  admin: {
+    dashboard: typeof routes['admin.dashboard']
+    events: typeof routes['admin.events'] & {
+      create: typeof routes['admin.events.create']
+    }
+    reports: typeof routes['admin.reports']
+    tickets: {
+      quota: typeof routes['admin.tickets.quota'] & {
+        create: typeof routes['admin.tickets.quota.create']
+      }
+    }
+    partners: typeof routes['admin.partners']
   }
 }

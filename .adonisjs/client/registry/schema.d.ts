@@ -43,7 +43,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'session.create': {
+  'login': {
     methods: ["GET","HEAD"]
     pattern: '/login'
     types: {
@@ -51,8 +51,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/session_controller').default['create']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/session_controller').default['create']>>>
+      response: unknown
+      errorResponse: unknown
     }
   }
   'session.store': {
@@ -398,6 +398,90 @@ export interface Registry {
       body: {}
       paramsTuple: [ParamValue]
       params: { eventId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admin.dashboard': {
+    methods: ["GET","HEAD"]
+    pattern: '/admin/dashboard'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admin.events': {
+    methods: ["GET","HEAD"]
+    pattern: '/admin/events'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admin.events.create': {
+    methods: ["GET","HEAD"]
+    pattern: '/admin/events/create'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admin.reports': {
+    methods: ["GET","HEAD"]
+    pattern: '/admin/reports'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admin.tickets.quota': {
+    methods: ["GET","HEAD"]
+    pattern: '/admin/tickets/quota'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admin.tickets.quota.create': {
+    methods: ["GET","HEAD"]
+    pattern: '/admin/tickets/quota/create'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admin.partners': {
+    methods: ["GET","HEAD"]
+    pattern: '/admin/partners'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
       query: {}
       response: unknown
       errorResponse: unknown

@@ -7,7 +7,7 @@ export type ScannedRoutes = {
     'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'new_account.store': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
+    'login': { paramsTuple?: []; params?: {} }
     'session.store': { paramsTuple?: []; params?: {} }
     'session.destroy': { paramsTuple?: []; params?: {} }
     'events.index': { paramsTuple?: []; params?: {} }
@@ -37,11 +37,18 @@ export type ScannedRoutes = {
     'dashboard.export_transactions': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
     'dashboard.export_checkins': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
     'dashboard.partner_summary': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
+    'admin.dashboard': { paramsTuple?: []; params?: {} }
+    'admin.events': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.reports': { paramsTuple?: []; params?: {} }
+    'admin.tickets.quota': { paramsTuple?: []; params?: {} }
+    'admin.tickets.quota.create': { paramsTuple?: []; params?: {} }
+    'admin.partners': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
+    'login': { paramsTuple?: []; params?: {} }
     'events.index': { paramsTuple?: []; params?: {} }
     'events.show_by_slug': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'events.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -57,11 +64,18 @@ export type ScannedRoutes = {
     'dashboard.export_transactions': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
     'dashboard.export_checkins': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
     'dashboard.partner_summary': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
+    'admin.dashboard': { paramsTuple?: []; params?: {} }
+    'admin.events': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.reports': { paramsTuple?: []; params?: {} }
+    'admin.tickets.quota': { paramsTuple?: []; params?: {} }
+    'admin.tickets.quota.create': { paramsTuple?: []; params?: {} }
+    'admin.partners': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
+    'login': { paramsTuple?: []; params?: {} }
     'events.index': { paramsTuple?: []; params?: {} }
     'events.show_by_slug': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'events.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -77,6 +91,13 @@ export type ScannedRoutes = {
     'dashboard.export_transactions': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
     'dashboard.export_checkins': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
     'dashboard.partner_summary': { paramsTuple: [ParamValue]; params: {'eventId': ParamValue} }
+    'admin.dashboard': { paramsTuple?: []; params?: {} }
+    'admin.events': { paramsTuple?: []; params?: {} }
+    'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.reports': { paramsTuple?: []; params?: {} }
+    'admin.tickets.quota': { paramsTuple?: []; params?: {} }
+    'admin.tickets.quota.create': { paramsTuple?: []; params?: {} }
+    'admin.partners': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'new_account.store': { paramsTuple?: []; params?: {} }
