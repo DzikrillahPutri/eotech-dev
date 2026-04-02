@@ -12,7 +12,7 @@ export default class extends BaseSchema {
       table.string('organizer_contact', 50).notNullable()
       table.dateTime('registration_start_at').notNullable()
       table.dateTime('registration_end_at').notNullable()
-      table.string('banner', 50).nullable()
+      table.string('banner').nullable()
       table.enum('status', [
         'pending',
         'publish',

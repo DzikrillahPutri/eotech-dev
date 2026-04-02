@@ -70,14 +70,6 @@ export default class RoleMiddleware {
   }
 
   /**
-   * Cek apakah user memiliki role minimal yang dibutuhkan (berbasis hierarki).
-   * Berguna untuk route yang membutuhkan "setidaknya" level tertentu.
-   */
-  private hasMinRole(userRole: AppRole, minRole: AppRole): boolean {
-    return (ROLE_HIERARCHY[userRole] ?? -1) >= (ROLE_HIERARCHY[minRole] ?? 0)
-  }
-
-  /**
    * Handle — dipanggil oleh AdonisJS untuk setiap request yang melewati middleware ini.
    *
    * Cara pakai di routes.ts:

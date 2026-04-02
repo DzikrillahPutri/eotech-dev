@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
+  <meta name="csrf-token" content="{{ csrf }}">
+  
   <title inertia>Eotech Tiket</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,8 +20,14 @@
     }
   </style>
 
-  @vite(['inertia/app.ts'])
+  @if(config('app.environment') === 'production')
+    @vite(['inertia/app.ts'])
+  @else
+    <script type="module" src="http://localhost:5173/@vite/client"></script>
+    <script type="module" src="http://localhost:5173/inertia/app.ts"></script>
+  @endif
   @inertiaHead()
+  @stack('dumper')
 </head>
 
 <body class="min-h-screen bg-[#F8FAFC]">

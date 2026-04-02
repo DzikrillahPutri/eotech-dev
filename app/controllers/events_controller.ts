@@ -19,7 +19,7 @@ export default class EventsController {
     const messageId = this.generateMessageId()
     const page = request.input('page', 1)
     const limit = request.input('limit', 10)
-    const status = request.input('status') // filter by EventStatus: pending | published | archived
+    const status = request.input('status', 'publish') // default to publish for public safety
 
     logger.info({ messageId, page, limit, status }, '[INDEX] Fetching event list')
 
@@ -27,9 +27,7 @@ export default class EventsController {
       const query = db.from('events').orderBy('created_at', 'desc')
 
       // PRD: Published events visible publicly; Draft/Archived filtered by admin
-      if (status) {
-        query.where('status', status)
-      }
+      query.where('status', status)
 
       const dataEvent = await query.paginate(page, limit)
 

@@ -4,6 +4,9 @@ import {
   Search, MapPin, Music, GraduationCap, Compass, Trophy, 
   Calendar, ChevronRight, Instagram, Linkedin, Youtube 
 } from 'lucide-vue-next'
+import ButtonLogin from '../components/ButtonLogin.vue'
+import ButtonRegister from '../components/ButtonRegister.vue'
+import EventListPublic from '../components/EventListPublic.vue'
 
 const categories = [
   { name: 'Konser', icon: Music },
@@ -34,9 +37,10 @@ const latestEvents = [
           <a href="#" class="text-gray-500 hover:text-[#0D4433] uppercase">Cek Status Tiket</a>
         </div>
       </div>
-      <button class="bg-[#0D4433] text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-[#155e47] transition-all">
-        Login Admin
-      </button>
+      <div class="flex justify-between gap-2">
+        <ButtonLogin />
+        <ButtonRegister />
+      </div>
     </nav>
 
     <section class="px-6 md:px-20 py-8 text-left">
@@ -121,26 +125,7 @@ const latestEvents = [
       </div>
     </section>
 
-    <section class="px-6 md:px-20 py-12 text-left bg-gray-50/50">
-      <p class="text-[10px] font-bold text-[#0D4433] uppercase tracking-[0.2em] mb-2">Update</p>
-      <h2 class="text-3xl font-bold mb-10 text-gray-900 tracking-tight">Event Terbaru</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div v-for="event in latestEvents" :key="event.title" class="group bg-white p-5 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-lg transition-all text-left">
-          <div class="relative rounded-[24px] overflow-hidden aspect-[1/1] mb-5 bg-gray-100">
-            <img :src="event.img" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-            <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-[#0D4433]">TERBARU</span>
-          </div>
-          <h3 class="font-bold text-lg mb-1.5 text-gray-950 tracking-tight leading-snug">{{ event.title }}</h3>
-          <p class="text-gray-400 text-xs mb-5 flex items-center gap-1.5"><MapPin class="w-3 h-3"/> {{ event.loc }}</p>
-          <div class="flex justify-between items-center pt-5 border-t border-gray-100">
-            <span class="font-extrabold text-lg tracking-tight text-[#0D4433]">{{ event.price }}</span>
-            <button class="text-[10px] font-bold text-[#0D4433] border-2 border-[#0D4433]/20 px-4 py-2 rounded-xl hover:bg-[#0D4433] hover:text-white transition-all shadow-sm">
-              Detail Event
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <EventListPublic />
 
     <footer class="bg-[#0D4433] text-white px-6 md:px-20 py-24 mt-20 text-left border-t border-white/10 shadow-inner">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-16">
