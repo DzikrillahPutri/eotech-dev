@@ -20,12 +20,7 @@
     }
   </style>
 
-  @if(config('app.environment') === 'production')
-    @vite(['inertia/app.ts'])
-  @else
-    <script type="module" src="http://localhost:5173/@vite/client"></script>
-    <script type="module" src="http://localhost:5173/inertia/app.ts"></script>
-  @endif
+  @vite(['inertia/app.ts'])
   @inertiaHead()
   @stack('dumper')
 </head>

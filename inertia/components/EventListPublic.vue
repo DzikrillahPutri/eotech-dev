@@ -100,7 +100,9 @@ interface ApiResponse {
   data: {
     data: Event[]
     meta: PaginationMeta
-  }
+  },
+  trace_code?: string,
+  total_data?: number
 }
 
 const events = ref<Event[]>([])
@@ -119,8 +121,10 @@ const fetchEvents = async (page = 1) => {
     }
 
     const result: ApiResponse = await response.json()
+
     events.value = result.data.data
     pagination.value = result.data.meta
+
   } catch (err) {
     error.value = err instanceof Error ? err.message : 'Failed to fetch events'
     console.error('Error fetching events:', err)

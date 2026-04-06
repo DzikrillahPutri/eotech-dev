@@ -48,6 +48,9 @@ export default class Event extends EventSchema {
         }
     }
 
-    @hasMany(()=>User)
+    @hasMany(()=>User ,{
+        foreignKey: 'user_id',
+    })
     declare owner_id: HasMany<typeof User>
+
 }

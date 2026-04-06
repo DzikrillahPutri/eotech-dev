@@ -2,7 +2,7 @@
 import { Link, usePage } from '@inertiajs/vue3'
 import { 
   LayoutDashboard, Calendar, BarChart3, 
-  Ticket, Users, LogOut, Bell, Settings, Search 
+  Ticket, Users, LogOut, Bell, Search 
 } from 'lucide-vue-next'
 
 const page = usePage()

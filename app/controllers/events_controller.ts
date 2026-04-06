@@ -2,8 +2,15 @@ import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 import Event from '#models/event'
 import { randomUUID } from 'node:crypto'
+import { EventService } from '#services/event_service'
 
 export default class EventsController {
+  private eventService: EventService
+
+  constructor() {
+    this.eventService = new EventService()
+  }
+
   /**
    * Generate a trace message ID for each request lifecycle
    */
@@ -24,19 +31,25 @@ export default class EventsController {
     logger.info({ messageId, page, limit, status }, '[INDEX] Fetching event list')
 
     try {
-      const query = db.from('events').orderBy('created_at', 'desc')
 
-      // PRD: Published events visible publicly; Draft/Archived filtered by admin
-      query.where('status', status)
+      // refactor to use event service for fetching event data with pagination and status filter
 
-      const dataEvent = await query.paginate(page, limit)
+      const eventsData  = await this.eventService.getEventDataPublic({ page, limit, status })
 
-      logger.info({ messageId, total: dataEvent.total }, '[INDEX] Events fetched successfully')
+      
+      // const query = db.from('events').orderBy('created_at', 'desc')
+
+      // // PRD: Published events visible publicly; Draft/Archived filtered by admin
+      // query.where('status', status)
+
+      // const dataEvent = await query.paginate(page, limit)
+
+      logger.info({ messageId, total: limit }, '[INDEX] Events fetched successfully')
 
       return response.ok({
         message_id: messageId,
         message: 'success',
-        data: dataEvent,
+        data: eventsData.data,
       })
     } catch (error) {
       logger.error({ messageId, error: error.message }, '[INDEX] Failed to fetch events')
