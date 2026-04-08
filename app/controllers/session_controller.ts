@@ -23,7 +23,6 @@ export default class SessionController {
       {
         messageId,
         email,
-        hasPassword: !!password,
         ip: request.ip(),
         userAgent: request.header('user-agent'),
       },
@@ -41,6 +40,7 @@ export default class SessionController {
         },
       })
     }
+    
 
     try {
       // ── Step 1: Verify credentials ──────────────────────────────────────────
@@ -48,18 +48,18 @@ export default class SessionController {
       const user = await User.verifyCredentials(email, password)
 
       logger.info(
-        { messageId, userId: user.userId, role: user.role, email: user.email },
+        { messageId, user_id: user.user_id, role: user.role, email: user.email },
         '[LOGIN] Credentials verified'
       )
 
       // ── Step 2: Authenticate session ────────────────────────────────────────
-      logger.info({ messageId, userId: user.userId }, '[LOGIN] Creating web session')
+      logger.info({ messageId, user_id: user.user_id }, '[LOGIN] Creating web session')
       await auth.use('web').login(user)
 
       logger.info(
         {
           messageId,
-          userId: user.userId,
+          user_id: user.user_id,
           isAuthenticated: auth.isAuthenticated,
           sessionId: session.sessionId,
         },
@@ -67,10 +67,10 @@ export default class SessionController {
       )
 
       // ── Step 3: Redirect ────────────────────────────────────────────────────
-      logger.info({ messageId, userId: user.userId }, '[LOGIN] Redirecting to admin.dashboard')
+      logger.info({ messageId, user_id: user.user_id }, '[LOGIN] Redirecting to admin.dashboard')
       return response.redirect().toRoute('admin.dashboard')
 
-    } catch (error) {
+    } catch (error: any) {
       // ── Classify error for better trace ──────────────────────────────────────
       const isCredentialError = error.code === 'E_INVALID_CREDENTIALS'
 
@@ -99,16 +99,16 @@ export default class SessionController {
     const messageId = `LOGOUT-${Date.now()}-${randomUUID().split('-')[0].toUpperCase()}`
 
     try {
-      const userId = auth.user?.userId
+      const user_id = auth.user?.user_id
       const sessionId = session.sessionId
 
-      logger.info({ messageId, userId, sessionId }, '[LOGOUT] Logout attempt started')
+      logger.info({ messageId, user_id, sessionId }, '[LOGOUT] Logout attempt started')
       await auth.use('web').logout()
-      logger.info({ messageId, userId, sessionId }, '[LOGOUT] Session destroyed successfully')
+      logger.info({ messageId, user_id, sessionId }, '[LOGOUT] Session destroyed successfully')
 
       return response.redirect().toRoute('login')
 
-    } catch (error) {
+    } catch (error: any) {
       logger.error(
         { messageId, errorMessage: error.message, stack: error.stack },
         '[LOGOUT] Unexpected error during logout'

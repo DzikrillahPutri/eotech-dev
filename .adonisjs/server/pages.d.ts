@@ -10,7 +10,10 @@ type ExtractProps<T> = Omit<
 declare module '@adonisjs/inertia/types' {
   export interface InertiaPages {
     'admin/dashboard': ExtractProps<(typeof import('../../inertia/pages/admin/dashboard.vue'))['default']>
+    'admin/dashboards/SuperAdminDashboard': ExtractProps<(typeof import('../../inertia/pages/admin/dashboards/SuperAdminDashboard.vue'))['default']>
     'admin/events/create': ExtractProps<(typeof import('../../inertia/pages/admin/events/create.vue'))['default']>
+    'admin/events/edit': ExtractProps<(typeof import('../../inertia/pages/admin/events/edit.vue'))['default']>
+    'admin/events/EventList': ExtractProps<(typeof import('../../inertia/pages/admin/events/EventList.vue'))['default']>
     'admin/events/index': ExtractProps<(typeof import('../../inertia/pages/admin/events/index.vue'))['default']>
     'admin/partners/index': ExtractProps<(typeof import('../../inertia/pages/admin/partners/index.vue'))['default']>
     'admin/reports/index': ExtractProps<(typeof import('../../inertia/pages/admin/reports/index.vue'))['default']>
@@ -22,5 +25,6 @@ declare module '@adonisjs/inertia/types' {
     'errors/server_error': ExtractProps<(typeof import('../../inertia/pages/errors/server_error.vue'))['default']>
     'events/show': ExtractProps<(typeof import('../../inertia/pages/events/show.vue'))['default']>
     'home': ExtractProps<(typeof import('../../inertia/pages/home.vue'))['default']>
+    'participant/ParticipantDashboard': ExtractProps<(typeof import('../../inertia/pages/participant/ParticipantDashboard.vue'))['default']>
   }
 }

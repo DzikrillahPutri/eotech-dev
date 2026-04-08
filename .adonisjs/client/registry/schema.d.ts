@@ -7,6 +7,18 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
+  'drive.fs.serve': {
+    methods: ["GET","HEAD"]
+    pattern: '/uploads/*'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { '*': ParamValue[] }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
   'home': {
     methods: ["GET","HEAD"]
     pattern: '/'
@@ -94,6 +106,18 @@ export interface Registry {
   'api.events.index': {
     methods: ["GET","HEAD"]
     pattern: '//api/v1/events'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'api.events.stats': {
+    methods: ["GET","HEAD"]
+    pattern: '//api/v1/events/stats'
     types: {
       body: {}
       paramsTuple: []
@@ -194,6 +218,18 @@ export interface Registry {
       body: {}
       paramsTuple: []
       params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admin.events.edit': {
+    methods: ["GET","HEAD"]
+    pattern: '/admin/events/:id/edit'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
       query: {}
       response: unknown
       errorResponse: unknown

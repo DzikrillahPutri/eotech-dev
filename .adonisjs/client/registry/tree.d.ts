@@ -2,6 +2,11 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  drive: {
+    fs: {
+      serve: typeof routes['drive.fs.serve']
+    }
+  }
   home: typeof routes['home']
   newAccount: {
     create: typeof routes['new_account.create']
@@ -20,6 +25,7 @@ export interface ApiDefinition {
   api: {
     events: {
       index: typeof routes['api.events.index']
+      stats: typeof routes['api.events.stats']
       showBySlug: typeof routes['api.events.showBySlug']
     }
   }
@@ -33,6 +39,7 @@ export interface ApiDefinition {
     dashboard: typeof routes['admin.dashboard']
     events: typeof routes['admin.events'] & {
       create: typeof routes['admin.events.create']
+      edit: typeof routes['admin.events.edit']
     }
     reports: typeof routes['admin.reports']
     tickets: {

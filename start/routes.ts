@@ -47,6 +47,7 @@ router.get('/events', [EventsController, 'index']).as('public.events.index')
 // ─── Event API ────────────────────────────────────────────────────────────────
 router.group(() => {
   router.get(`${api}/events`, [EventsController, 'index']).as('api.events.index')
+  router.get(`${api}/events/stats`, [EventsController, 'getStats']).as('api.events.stats')
   router.get(`${api}/events/slug/:slug`, [EventsController, 'showBySlug']).as('api.events.showBySlug')
 }).prefix('')
 
@@ -154,6 +155,10 @@ router
     router.get('/admin/events/create', async ({ inertia }) => {
       return inertia.render('admin/events/create', {})
     }).as('admin.events.create')
+
+    router.get('/admin/events/:id/edit', async ({ inertia, params }) => {
+      return inertia.render('admin/events/edit', { eventId: params.id })
+    }).as('admin.events.edit')
 
     // Laporan Penjualan - requires event_organizer_admin or super_admin
     router.get('/admin/reports', async ({ inertia }) => {

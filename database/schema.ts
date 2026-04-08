@@ -8,7 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class EventMemberSchema extends BaseModel {
-  static $columns = ['createdAt', 'eventId', 'eventMemberId', 'role', 'updatedAt', 'userId'] as const
+  static $columns = ['createdAt', 'eventId', 'eventMemberId', 'role', 'updatedAt', 'user_id'] as const
   $columns = EventMemberSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -21,7 +21,7 @@ export class EventMemberSchema extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()
-  declare userId: string
+  declare user_id: string
 }
 
 export class EventSchema extends BaseModel {
@@ -144,7 +144,7 @@ export class TicketSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'password', 'role', 'updatedAt', 'userId'] as const
+  static $columns = ['createdAt', 'email', 'fullName', 'password', 'role', 'updatedAt', 'user_id'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -159,5 +159,5 @@ export class UserSchema extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column({ isPrimary: true })
-  declare userId: string
+  declare user_id: string
 }
