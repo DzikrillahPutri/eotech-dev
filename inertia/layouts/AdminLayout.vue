@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3'
+import logoutButton from '../components/logoutButton.vue'
 import { 
   LayoutDashboard, Calendar, BarChart3, 
-  Ticket, Users, LogOut, Bell, Settings, Search 
+  Ticket, Users, Bell, Search 
 } from 'lucide-vue-next'
+
+
 
 const page = usePage()
 </script>
@@ -58,13 +61,7 @@ const page = usePage()
         </Link>
       </nav>
 
-      <div class="p-6 border-t border-slate-50">
-        <Link href="/logout" method="post" as="button" 
-          class="w-full flex items-center space-x-3.5 px-5 py-3 text-rose-500 hover:bg-rose-50 rounded-2xl transition-all outline-none">
-          <LogOut class="w-5 h-5" />
-          <span class="text-[13px] font-[700]">Keluar</span>
-        </Link>
-      </div>
+      <logoutButton />
     </aside>
 
     <main class="flex-1 ml-[260px] min-h-screen flex flex-col">

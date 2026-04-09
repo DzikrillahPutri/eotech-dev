@@ -20,6 +20,18 @@ services:
       - 8090:80
     depends_on:
       - db
+  
+  redis:
+    image: redis:latest
+    command: redis-server --requirepass 1122
+    ports:
+      - 6379:6379
+    environment:
+      - REDIS_PASSWORD=1122
+      - REDIS_HOST=redis
+      - REDIS_USERNAME=default
+      - REDIS_PORT=6379
+
 
 volumes:
   mysql-data:

@@ -6,6 +6,12 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'drive.fs.serve': {
+    methods: ["GET","HEAD"],
+    pattern: '/uploads/*',
+    tokens: [{"old":"/uploads/*","type":0,"val":"uploads","end":""},{"old":"/uploads/*","type":2,"val":"*","end":""}],
+    types: placeholder as Registry['drive.fs.serve']['types'],
+  },
   'home': {
     methods: ["GET","HEAD"],
     pattern: '/',
@@ -54,6 +60,12 @@ const routes = {
     tokens: [{"old":"//api/v1/events","type":0,"val":"","end":""},{"old":"//api/v1/events","type":0,"val":"api","end":""},{"old":"//api/v1/events","type":0,"val":"v1","end":""},{"old":"//api/v1/events","type":0,"val":"events","end":""}],
     types: placeholder as Registry['api.events.index']['types'],
   },
+  'api.events.stats': {
+    methods: ["GET","HEAD"],
+    pattern: '//api/v1/events/stats',
+    tokens: [{"old":"//api/v1/events/stats","type":0,"val":"","end":""},{"old":"//api/v1/events/stats","type":0,"val":"api","end":""},{"old":"//api/v1/events/stats","type":0,"val":"v1","end":""},{"old":"//api/v1/events/stats","type":0,"val":"events","end":""},{"old":"//api/v1/events/stats","type":0,"val":"stats","end":""}],
+    types: placeholder as Registry['api.events.stats']['types'],
+  },
   'api.events.showBySlug': {
     methods: ["GET","HEAD"],
     pattern: '//api/v1/events/slug/:slug',
@@ -101,6 +113,12 @@ const routes = {
     pattern: '/admin/events/create',
     tokens: [{"old":"/admin/events/create","type":0,"val":"admin","end":""},{"old":"/admin/events/create","type":0,"val":"events","end":""},{"old":"/admin/events/create","type":0,"val":"create","end":""}],
     types: placeholder as Registry['admin.events.create']['types'],
+  },
+  'admin.events.edit': {
+    methods: ["GET","HEAD"],
+    pattern: '/admin/events/:id/edit',
+    tokens: [{"old":"/admin/events/:id/edit","type":0,"val":"admin","end":""},{"old":"/admin/events/:id/edit","type":0,"val":"events","end":""},{"old":"/admin/events/:id/edit","type":1,"val":"id","end":""},{"old":"/admin/events/:id/edit","type":0,"val":"edit","end":""}],
+    types: placeholder as Registry['admin.events.edit']['types'],
   },
   'admin.reports': {
     methods: ["GET","HEAD"],

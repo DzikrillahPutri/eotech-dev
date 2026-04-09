@@ -1,9 +1,9 @@
 import { EventSchema } from '#database/schema'
-import { beforeCreate, column, hasMany } from '@adonisjs/lucid/orm'
+import { beforeCreate, belongsTo, column} from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import { v4 as uuidv4 } from 'uuid'
 import User from './user.ts'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class Event extends EventSchema {
     static primaryKey = 'event_id'
@@ -48,6 +48,10 @@ export default class Event extends EventSchema {
         }
     }
 
-    @hasMany(()=>User)
-    declare owner_id: HasMany<typeof User>
+    @column()
+    declare owner_id: string
+
+    @belongsTo(() => User, { foreignKey: 'owner_id' })
+    declare owner: BelongsTo<typeof User>
+
 }

@@ -100,17 +100,17 @@ export default class RoleMiddleware {
     const userRole = user.role as AppRole
 
     // ERD: primary key users table adalah user_id (uuid), bukan id
-    const userId = user.userId
+    const user_id = user.user_id
 
     logger.info(
-      { messageId, userId, userRole, allowedRoles },
+      { messageId, user_id, userRole, allowedRoles },
       '[ROLE] Checking role access'
     )
 
     // ── 2. Validasi role user ada di enum yang dikenal ────────────────────
     if (!Object.keys(ROLE_HIERARCHY).includes(userRole)) {
       logger.warn(
-        { messageId, userId, userRole },
+        { messageId, user_id, userRole },
         '[ROLE] Unknown role detected'
       )
       response.forbidden({
@@ -123,7 +123,7 @@ export default class RoleMiddleware {
     // ── 3. Cek apakah role diizinkan ──────────────────────────────────────
     if (!this.isRoleAllowed(userRole, allowedRoles)) {
       logger.warn(
-        { messageId, userId, userRole, allowedRoles },
+        { messageId, user_id, userRole, allowedRoles },
         '[ROLE] Access denied — insufficient role'
       )
       response.forbidden({
@@ -137,7 +137,7 @@ export default class RoleMiddleware {
 
     // ── 4. Akses diizinkan, lanjutkan ke handler ──────────────────────────
     logger.info(
-      { messageId, userId, userRole },
+      { messageId, user_id, userRole },
       '[ROLE] Access granted'
     )
 

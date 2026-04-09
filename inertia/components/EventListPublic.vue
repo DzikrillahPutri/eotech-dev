@@ -1,6 +1,6 @@
 <template>
   <section class="px-6 md:px-20 py-12 text-left bg-gray-50/50">
-    <p class="text-[10px] font-bold text-[#0D4433] uppercase tracking-[0.2em] mb-2">Event</p>
+    <p class="text-[10px] font-bold text-eotech uppercase tracking-[0.2em] mb-2">Event</p>
     <h2 class="text-3xl font-bold mb-10 text-gray-900 tracking-tight">Event Terbaru</h2>
 
     <div v-if="loading" class="flex justify-center py-12">
@@ -11,13 +11,15 @@
       <div v-for="event in events" :key="event.event_id" class="group bg-white p-5 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-lg transition-all text-left">
         <div class="relative rounded-[24px] overflow-hidden aspect-[1/1] mb-5 bg-gray-100">
           <img :src="event.banner || '/images/default-event.jpg'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-          <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-[#0D4433]">TERBARU</span>
+          <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-eotech">TERBARU</span>
         </div>
         <h3 class="font-bold text-lg mb-1.5 text-gray-950 tracking-tight leading-snug">{{ event.title }}</h3>
         <p class="text-gray-400 text-xs mb-5 flex items-center gap-1.5"><span class="w-3 h-3 bg-gray-300 rounded-full"></span> {{ event.location }}</p>
         <div class="flex justify-between items-center pt-5 border-t border-gray-100">
-          <span class="font-extrabold text-lg tracking-tight text-[#0D4433]">IDR 0++</span>
-          <button class="text-[10px] font-bold text-[#0D4433] border-2 border-[#0D4433]/20 px-4 py-2 rounded-xl hover:bg-[#0D4433] hover:text-white transition-all shadow-sm">
+          <span class="font-extrabold text-lg tracking-tight text-eotech">IDR 0++</span>
+
+          
+          <button class="text-[10px] font-bold text-eotech border-2 border-eotech/20 px-4 py-2 rounded-xl hover:bg-eotech hover:text-white transition-all shadow-sm">
             Lihat Detail
           </button>
         </div>
@@ -34,7 +36,7 @@
         <button
           v-if="pagination.current_page > 1"
           @click="goToPage(pagination.current_page - 1)"
-          class="px-4 py-2 text-sm font-medium text-[#0D4433] bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+          class="px-4 py-2 text-sm font-medium text-eotech bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
         >
           Previous
         </button>
@@ -46,8 +48,8 @@
           :class="[
             'px-4 py-2 text-sm font-medium rounded-lg',
             page === pagination.current_page
-              ? 'text-white bg-[#0D4433]'
-              : 'text-[#0D4433] bg-white border border-gray-300 hover:bg-gray-50'
+              ? 'text-white bg-eotech'
+              : 'text-eotech bg-white border border-gray-300 hover:bg-gray-50'
           ]"
         >
           {{ page }}
@@ -56,7 +58,7 @@
         <button
           v-if="pagination.current_page < pagination.last_page"
           @click="goToPage(pagination.current_page + 1)"
-          class="px-4 py-2 text-sm font-medium text-[#0D4433] bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+          class="px-4 py-2 text-sm font-medium text-eotech bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
         >
           Next
         </button>
@@ -98,9 +100,11 @@ interface ApiResponse {
   message_id: string
   message: string
   data: {
-    data: Event[]
     meta: PaginationMeta
-  }
+    data_events: Event[]
+  },
+  trace_code?: string,
+  total_data?: number
 }
 
 const events = ref<Event[]>([])
@@ -119,8 +123,10 @@ const fetchEvents = async (page = 1) => {
     }
 
     const result: ApiResponse = await response.json()
-    events.value = result.data.data
+
+    events.value = result.data.data_events
     pagination.value = result.data.meta
+
   } catch (err) {
     error.value = err instanceof Error ? err.message : 'Failed to fetch events'
     console.error('Error fetching events:', err)

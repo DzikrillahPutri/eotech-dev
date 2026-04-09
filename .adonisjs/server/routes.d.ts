@@ -4,6 +4,7 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
+    'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'new_account.store': { paramsTuple?: []; params?: {} }
@@ -12,6 +13,7 @@ export type ScannedRoutes = {
     'session.destroy': { paramsTuple?: []; params?: {} }
     'public.events.index': { paramsTuple?: []; params?: {} }
     'api.events.index': { paramsTuple?: []; params?: {} }
+    'api.events.stats': { paramsTuple?: []; params?: {} }
     'api.events.showBySlug': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'events.store': { paramsTuple?: []; params?: {} }
     'events.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -20,38 +22,45 @@ export type ScannedRoutes = {
     'admin.dashboard': { paramsTuple?: []; params?: {} }
     'admin.events': { paramsTuple?: []; params?: {} }
     'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.reports': { paramsTuple?: []; params?: {} }
     'admin.tickets.quota': { paramsTuple?: []; params?: {} }
     'admin.tickets.quota.create': { paramsTuple?: []; params?: {} }
     'admin.partners': { paramsTuple?: []; params?: {} }
   }
   GET: {
+    'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'login': { paramsTuple?: []; params?: {} }
     'public.events.index': { paramsTuple?: []; params?: {} }
     'api.events.index': { paramsTuple?: []; params?: {} }
+    'api.events.stats': { paramsTuple?: []; params?: {} }
     'api.events.showBySlug': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'events.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.dashboard': { paramsTuple?: []; params?: {} }
     'admin.events': { paramsTuple?: []; params?: {} }
     'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.reports': { paramsTuple?: []; params?: {} }
     'admin.tickets.quota': { paramsTuple?: []; params?: {} }
     'admin.tickets.quota.create': { paramsTuple?: []; params?: {} }
     'admin.partners': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
+    'drive.fs.serve': { paramsTuple: [...ParamValue[]]; params: {'*': ParamValue[]} }
     'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'login': { paramsTuple?: []; params?: {} }
     'public.events.index': { paramsTuple?: []; params?: {} }
     'api.events.index': { paramsTuple?: []; params?: {} }
+    'api.events.stats': { paramsTuple?: []; params?: {} }
     'api.events.showBySlug': { paramsTuple: [ParamValue]; params: {'slug': ParamValue} }
     'events.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.dashboard': { paramsTuple?: []; params?: {} }
     'admin.events': { paramsTuple?: []; params?: {} }
     'admin.events.create': { paramsTuple?: []; params?: {} }
+    'admin.events.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'admin.reports': { paramsTuple?: []; params?: {} }
     'admin.tickets.quota': { paramsTuple?: []; params?: {} }
     'admin.tickets.quota.create': { paramsTuple?: []; params?: {} }
